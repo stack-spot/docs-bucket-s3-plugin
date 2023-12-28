@@ -1,0 +1,41 @@
+schema-version: v2
+kind: plugin
+metadata:
+  name: bucket-s3-plugin
+  display-name: Bucket S3 Plugin
+  description: Criação de Bucket s3
+  version: 1.0.0
+  picture: plugin.png
+spec:
+  type: infra
+  compatibility:
+    - aws
+    - terraform
+  about: docs/about.md
+  implementation: docs/implementation.md
+  release-notes: docs/release-notes-0.0.1.md
+  requirements: docs/requirements.md
+  single-use: False
+  runtime:
+    environment:
+      - terraform-1-4
+      - aws-cli-2
+      - git-2
+  technologies: # Ref: https://docs.stackspot.com/create-use/create-content/yaml-files/plugin-yaml/#technologies-1
+    - Api
+  generates:
+    connections:
+      - type: aws-s3-conn
+        alias: bucket-s3-conn
+        outputs:
+          - from: bucket-s3-conn-arn
+            to: arn
+          - from: bucket-s3-conn-bucket_name
+            to: bucket_name
+  stk-projects-only: false
+  inputs:
+    - label: Type name of your bucket
+      name: bucket_name
+      type: text
+      required: true
+      help: 'Inform your bucket s3 name'
